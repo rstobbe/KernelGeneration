@@ -192,6 +192,19 @@ KDES.posSS = posSS;
 KDES.iKern = 1/res;
 KDES.zW = zW;
 KDES.Kern = Kern;
+if SS == 1.25
+    KDES.PossibleZeroFill = (50:10:1000);
+elseif SS == 1.28
+    KDES.PossibleZeroFill = (64:64:1000);
+elseif SS == 1.6
+    KDES.PossibleZeroFill = (64:16:1000);
+elseif SS == 2.0
+    KDES.PossibleZeroFill = (64:8:1000);
+elseif SS == 2.5
+    KDES.PossibleZeroFill = (50:10:1000);
+elseif SS == 4.0
+    KDES.PossibleZeroFill = (64:16:1000);
+end
 name = ['Kern_KBCw',num2str(W,2),'b',num2str(beta,3),'ss',num2str(SS,3)];
 KDES.name = regexprep(name,'\.', 'p');
 

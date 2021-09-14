@@ -33,12 +33,17 @@ if rem(round(1e9*(1/(res*SS)))/1e9,1)
     err.msg = '1/(Res*DesForSS) not an integer';
     return
 end
+if rem(W*SS,1)
+    err.flag = 1;
+    err.msg = 'Width*DesForSS not an integer';
+    return
+end
 
 %---------------------------------------------
 % Find all SS values that are compatible with res
 %---------------------------------------------
 m = 1;
-for n = 1:0.0005:6
+for n = 1:0.0005:10
     test = round(1e9/(res*n))/1e9;
     if not(rem(test,1)) && not(rem(W*n,1))
         posSS(m) = n;
@@ -72,7 +77,7 @@ if strcmp(button,'No')
     err.msg = '';
     return
 end
-if kernelsize > 1000
+if kernelsize > 1200
     err.flag = 1;
     err.msg = 'excessive kernlsize';
     return
@@ -162,7 +167,7 @@ f = (-1/(2*iCSVres):1/(ZF*iCSVres):1/(2*iCSVres) - 1/(ZF*iCSVres));
 hFig = figure(300); clf; hold on;
 plot(f,real(TF1Prof),'b');
 plot(f,imag(TF1Prof),'b:');
-plot(f,real(TFProf),'r');
+plot(f,real(TFProf),'r','linewidth',2);
 plot(f,imag(TFProf),'r:');
 plot([-0.5 -0.5],[0 1],'k:');
 plot([0.5 0.5],[0 1],'k:');
